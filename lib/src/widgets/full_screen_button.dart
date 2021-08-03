@@ -14,10 +14,12 @@ class FullScreenButton extends StatefulWidget {
   /// Defines color of the button.
   final Color color;
 
+  final Function? onFullscreenPressed;
   /// Creates [FullScreenButton] widget.
   FullScreenButton({
     this.controller,
     this.color = Colors.white,
+    this.onFullscreenPressed,
   });
 
   @override
@@ -64,7 +66,10 @@ class _FullScreenButtonState extends State<FullScreenButton> {
             : Icons.fullscreen,
         color: widget.color,
       ),
-      onPressed: () => _controller.toggleFullScreenMode(),
+      onPressed: () {
+        onFullscreenPressed?.call();
+        _controller.toggleFullScreenMode();
+      } 
     );
   }
 }
